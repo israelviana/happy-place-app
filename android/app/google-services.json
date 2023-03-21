@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "538862384527",
+    "project_id": "happyplaceauth",
+    "storage_bucket": "happyplaceauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538862384527:android:f9ef50ae0b616ebb2507fa",
+        "android_client_info": {
+          "package_name": "com.example.happy_place"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538862384527-bjicslrk1jhahdml1dlj4vdkrkfu94id.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeVRzJSajK5OGEnGrL5fP-vLHq9lI2v-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538862384527-bjicslrk1jhahdml1dlj4vdkrkfu94id.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
