@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:happy_place/Services/auth_service.dart';
+import 'package:happy_place/componentes/ButtonHappyPlace.dart';
 import 'package:happy_place/componentes/input_form.dart';
 import 'package:happy_place/repository/google_sign_in.dart';
 import 'package:happy_place/views/Home/home_page.dart';
@@ -18,10 +20,8 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController(text: '');
 
   bool isLogin = true;
-  late String title;
   late String titleButton;
   late String toggleButton;
-
 
   @override
   void initState() {
@@ -33,13 +33,9 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       isLogin = action;
       if (isLogin) {
-        title = 'Seja bem-vindo!';
-        titleButton = 'Entrar';
-        toggleButton = 'Cadastre-se agora.';
+        titleButton = 'Acessar';
       } else {
-        title = 'Cadastre-se agora!';
-        titleButton = 'Cadastrar';
-        toggleButton = 'Voltar ao Login.';
+        titleButton = 'Finalizar cadastro';
       }
     });
   }
@@ -47,26 +43,27 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xFFFFC61A),
         body: SafeArea(
             child: StreamBuilder(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (context, snapshot){
-                if(snapshot.hasData){
-                  return HomePage();
-                }else if(snapshot.hasError){
-                  return Text("deu errado no login with google!");
-                }else{
-                  return CustomScrollView(
-                    slivers: [
-                      SliverList(
-                          delegate: SliverChildListDelegate([
-                            loginPage(),
-                          ]))
-                    ],
-                  );
-                }
-              },
-            )));
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return HomePage();
+            } else if (snapshot.hasError) {
+              return Text("deu errado no login with google!");
+            } else {
+              return CustomScrollView(
+                slivers: [
+                  SliverList(
+                      delegate: SliverChildListDelegate([
+                    loginPage(),
+                  ]))
+                ],
+              );
+            }
+          },
+        )));
   }
 
   Widget loginPage() {
@@ -75,44 +72,61 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset("assets/images/imageLoginPng.png",
-              width: 280, height: 280),
-          const SizedBox(height: 20),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 40),
-          InputForm(
-              controller: _emailController, hintText: "Digite seu e-mail"),
-          const SizedBox(height: 20),
-          InputForm(
-              controller: _passwordController, hintText: "Digite sua senha"),
-          const SizedBox(height: 40),
-          ElevatedButton(
-              onPressed: () {
+          SvgPicture.asset("assets/images/logoHappyPlace.svg"),
+          const SizedBox(height: 76),
+          InputForm(controller: _emailController, hintText: "Email", title: "Digite seu e-mail"),
+          const SizedBox(height: 30),
+          InputForm(controller: _passwordController, hintText: "Senha", title: "Digite seu senha"),
+          const SizedBox(height: 30),
+          ButtonHappyPlace(
+              onTap: () {
                 if (isLogin) {
                   login();
                 } else {
                   register();
                 }
               },
-              child: Center(
-                child: Text(titleButton),
-              )),
-          const SizedBox(height: 20),
-          ElevatedButton(
-              onPressed: () {
-                loginWithGoogle();
+              title: titleButton,
+              type: TypeButton.primary),
+          const SizedBox(height: 30),
+          ButtonHappyPlace(
+              onTap: () {
+                setFormAction(!isLogin);
               },
-              child: Center(
-                child: Text("Google"),
-              )),
-          TextButton(onPressed: () => setFormAction(!isLogin),
-              child: Text(toggleButton))
+              title: "Cadastrar",
+              type: TypeButton.secondary),
+          const SizedBox(height: 17),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(width: 100, height: 1, color: Color(0xFF372A28)),
+              const SizedBox(width: 3),
+              const Text("Ou acesse com",
+                  style: TextStyle(
+                      fontFamily: "Josefin Sans",
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF372A28))),
+              const SizedBox(width: 3),
+              Container(width: 100, height: 1, color: Color(0xFF372A28)),
+            ],
+          ),
+          const SizedBox(height: 17),
+          GestureDetector(
+            onTap: () => loginWithGoogle(),
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(55, 42, 40, 0.7),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Transform.scale(
+                  scale: 0.8,
+                  child: SvgPicture.asset("assets/images/googleLogo.svg",
+                      height: 40, width: 40)),
+            ),
+          )
         ],
       ),
     );
@@ -120,21 +134,23 @@ class _LoginPageState extends State<LoginPage> {
 
   login() async {
     try {
-      await context.read<AuthService>().login(
-          _emailController.text, _passwordController.text);
+      await context
+          .read<AuthService>()
+          .login(_emailController.text, _passwordController.text);
     } on AuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.message)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
     }
   }
 
   register() async {
     try {
-      await context.read<AuthService>().register(
-          _emailController.text, _passwordController.text);
+      await context
+          .read<AuthService>()
+          .register(_emailController.text, _passwordController.text);
     } on AuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.message)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
     }
   }
 
@@ -142,8 +158,8 @@ class _LoginPageState extends State<LoginPage> {
     try {
       context.read<GoogleSignInHappyPlace>().googleLogin();
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 }

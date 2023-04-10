@@ -37,11 +37,11 @@ dependencies:
 
 
 flutter_native_splash:
-  color: "#fbdb4c"
-  image: "assets/splashScreen/happyFaceSplash.png"
+  color: "#FFC61A"
+  image: "assets/splashScreen/happyPlaceSplash.png"
   android_12:
-    color: "#fbdb4c"
-    image: "assets/splashScreen/happyFaceSplash.png"
+    color: "#FFC61A"
+    image: "assets/splashScreen/happyPlaceSplash.png"
 
   android: true
   ios: true
