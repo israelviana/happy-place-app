@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:happy_place/Components/input_form.dart';
 import 'package:happy_place/Services/auth_service.dart';
+import 'package:happy_place/componentes/input_form.dart';
+import 'package:happy_place/repository/google_sign_in.dart';
+import 'package:happy_place/views/Home/home_page.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -27,14 +29,14 @@ class _LoginPageState extends State<LoginPage> {
     setFormAction(true);
   }
 
-  setFormAction(bool action){
+  setFormAction(bool action) {
     setState(() {
       isLogin = action;
-      if(isLogin){
+      if (isLogin) {
         title = 'Seja bem-vindo!';
         titleButton = 'Entrar';
         toggleButton = 'Cadastre-se agora.';
-      }else{
+      } else {
         title = 'Cadastre-se agora!';
         titleButton = 'Cadastrar';
         toggleButton = 'Voltar ao Login.';
@@ -46,14 +48,25 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: CustomScrollView(
-      slivers: [
-        SliverList(
-            delegate: SliverChildListDelegate([
-              loginPage(),
-        ]))
-      ],
-    )));
+            child: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot){
+                if(snapshot.hasData){
+                  return HomePage();
+                }else if(snapshot.hasError){
+                  return Text("deu errado no login with google!");
+                }else{
+                  return CustomScrollView(
+                    slivers: [
+                      SliverList(
+                          delegate: SliverChildListDelegate([
+                            loginPage(),
+                          ]))
+                    ],
+                  );
+                }
+              },
+            )));
   }
 
   Widget loginPage() {
@@ -81,34 +94,56 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 40),
           ElevatedButton(
               onPressed: () {
-                if(isLogin){
+                if (isLogin) {
                   login();
-                }else{
+                } else {
                   register();
                 }
               },
               child: Center(
                 child: Text(titleButton),
               )),
-          TextButton(onPressed: () => setFormAction(!isLogin), child: Text(toggleButton))
+          const SizedBox(height: 20),
+          ElevatedButton(
+              onPressed: () {
+                loginWithGoogle();
+              },
+              child: Center(
+                child: Text("Google"),
+              )),
+          TextButton(onPressed: () => setFormAction(!isLogin),
+              child: Text(toggleButton))
         ],
       ),
     );
   }
 
-  login() async{
-    try{
-      await context.read<AuthService>().login(_emailController.text, _passwordController.text);
-    }on AuthException catch(e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
+  login() async {
+    try {
+      await context.read<AuthService>().login(
+          _emailController.text, _passwordController.text);
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message)));
     }
   }
 
-  register() async{
-    try{
-      await context.read<AuthService>().register(_emailController.text, _passwordController.text);
-    }on AuthException catch(e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
+  register() async {
+    try {
+      await context.read<AuthService>().register(
+          _emailController.text, _passwordController.text);
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message)));
+    }
+  }
+
+  loginWithGoogle() {
+    try {
+      context.read<GoogleSignInHappyPlace>().googleLogin();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())));
     }
   }
 }
