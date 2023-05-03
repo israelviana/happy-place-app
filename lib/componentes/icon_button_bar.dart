@@ -28,7 +28,7 @@ class IconButtomBar extends StatelessWidget {
                 onPressed: onPressed,
                 icon: icon),
           ),
-          Text(text, style: TextStyle(fontSize: 10))
+          Text(text, style: const  TextStyle(fontSize: 10))
         ],
       ),
     );
