@@ -89,12 +89,12 @@ class _LoginPageState extends State<LoginPage> {
               title: titleButton,
               type: TypeButton.primary),
           const SizedBox(height: 30),
-          ButtonHappyPlace(
+          isLogin ? ButtonHappyPlace(
               onTap: () {
                 setFormAction(!isLogin);
               },
               title: "Cadastrar",
-              type: TypeButton.secondary),
+              type: TypeButton.secondary) : const SizedBox(),
           const SizedBox(height: 17),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
