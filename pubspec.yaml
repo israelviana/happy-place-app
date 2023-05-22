@@ -34,6 +34,8 @@ dependencies:
   firebase_core: ^2.8.0
   provider: ^6.0.5
   google_sign_in: ^6.1.0
+  flutter_launcher_icons: ^0.13.1
+  keyboard_actions: ^4.2.0
 
 
 flutter_native_splash:
@@ -42,9 +44,15 @@ flutter_native_splash:
   android_12:
     color: "#FFC61A"
     image: "assets/splashScreen/happyPlaceSplash.png"
-
   android: true
   ios: true
+
+flutter_launcher_icons:
+  image_path: assets/splashScreen/iconHappyPlace.png
+  remove_alpha_ios: true
+  android: true
+  adaptive_icon_background: "#FFFFFF"
+  min_sdk_android: 21
 
 dev_dependencies:
   flutter_test:
