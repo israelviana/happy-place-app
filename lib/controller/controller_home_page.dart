@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happy_place/views/MoodCalendar/mood_calendar.dart';
 
 import '../views/Song/song_page.dart';
 
@@ -17,6 +18,23 @@ class ControllerHomePage{
         return _songPage();
       default:
         return _pageDefault();
+    }
+  }
+
+  String currentTitlePage({required int currentIndexPage}){
+    switch(currentIndexPage){
+      case 0:
+        return "Meditação";
+      case 1:
+        return "Palavra do dia";
+      case 2:
+        return "Início";
+      case 3:
+        return "Rastreador de Humor";
+      case 4:
+        return "Músicas";
+      default:
+        return "Página não existe";
     }
   }
 
@@ -43,14 +61,12 @@ class ControllerHomePage{
   }
 
   Widget _dailyHumorPags(){
-    return const Center(
-      child: Text("meditation pase"),
-    );
+    return const MoodCalendar();
   }
 
   Widget _dailyWorkPags(){
     return const Center(
-      child: Text("work dayle"),
+      child: Text("palavra do dia pase"),
     );
   }
 

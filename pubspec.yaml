@@ -37,6 +37,9 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   keyboard_actions: ^4.2.0
   connectivity_plus: ^4.0.1
+  table_calendar: ^3.0.9
+  auto_size_text: ^3.0.0
+
 
 
 flutter_native_splash:

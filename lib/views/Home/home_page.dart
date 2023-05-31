@@ -5,7 +5,7 @@ import 'package:happy_place/controller/controller_home_page.dart';
 import 'package:provider/provider.dart';
 import '../../componentes/icon_button_bar.dart';
 import '../../repository/google_sign_in.dart';
-import '../carrosel.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -70,12 +70,12 @@ class _HomePageState extends State<HomePage> {
                       onTap: (){},
                       child: CircleAvatar(
                           backgroundImage: NetworkImage(user.photoURL ?? "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"),
-                          minRadius: 30,
+                          minRadius: 25,
                       ),
                     ),
-                    ControllerHomePage().currentPage(currentIndexPage: _selectedIndex)
                   ],
-                )
+                ),
+                ControllerHomePage().currentPage(currentIndexPage: _selectedIndex)
               ],
             ),
           )
