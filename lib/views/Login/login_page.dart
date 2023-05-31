@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFFFC61A),
+        backgroundColor: const Color(0xFFFFC61A),
         body: SafeArea(
             child: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),

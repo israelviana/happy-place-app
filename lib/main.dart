@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:happy_place/Services/auth_service.dart';
 import 'package:happy_place/auth_check.dart';
 import 'package:happy_place/repository/google_sign_in.dart';
+import 'package:happy_place/router.dart';
 import 'package:provider/provider.dart';
 
 
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AppHappyPlace',
-      home: AuthCheck(), //load
+      home: AuthCheck(),
+      onGenerateRoute: RouterHappyPlace().mainRoutes(),/// load
     );
   }
 }

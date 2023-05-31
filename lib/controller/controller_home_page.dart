@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:happy_place/views/MoodCalendar/mood_calendar.dart';
+import 'package:happy_place/views/Profile/profile.dart';
 
 import '../views/Song/song_page.dart';
 
@@ -69,5 +70,6 @@ class ControllerHomePage{
       child: Text("palavra do dia pase"),
     );
   }
+
 
 }

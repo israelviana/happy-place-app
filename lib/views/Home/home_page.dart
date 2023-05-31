@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_place/Services/auth_service.dart';
 import 'package:happy_place/controller/controller_home_page.dart';
+import 'package:happy_place/router.dart';
+import 'package:happy_place/views/Profile/profile.dart';
 import 'package:provider/provider.dart';
 import '../../componentes/icon_button_bar.dart';
 import '../../repository/google_sign_in.dart';
@@ -71,7 +73,9 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     children: [
                       GestureDetector(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.pushNamed(context, profilePageRoute);
+                        },
                         child: CircleAvatar(
                             backgroundImage: NetworkImage(user.photoURL ?? "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"),
                             minRadius: 25,
@@ -89,13 +93,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-/*
-Center(
-child: ElevatedButton(
-onPressed: () {
-context.read<AuthService>().logout();
-context.read<GoogleSignInHappyPlace>().logout();
-},
-child: const Text("logout")),
-)
-*/
