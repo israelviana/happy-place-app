@@ -32,7 +32,8 @@ class _SongPageState extends State<SongPage> {
               fontWeight: FontWeight.w700,
               fontSize: 35,
               color: Color(0xFFFFF4EA)
-            ))
+            )),
+
           ],
         ),
       ),
