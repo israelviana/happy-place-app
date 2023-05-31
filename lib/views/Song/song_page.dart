@@ -22,7 +22,6 @@ class _SongPageState extends State<SongPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        IconButton(onPressed: () => _speak(), icon: Icon(Icons.abc))
       ],
     );
   }
