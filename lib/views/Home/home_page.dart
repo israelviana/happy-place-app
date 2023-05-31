@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
+    final mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color(0xFFFFC61A),
       bottomNavigationBar: Theme(
@@ -60,22 +61,26 @@ class _HomePageState extends State<HomePage> {
             fixedColor: Colors.white,
           )),
       body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: SizedBox(
+            height: mediaQuery.height,
+            width: mediaQuery.width,
             child: Column(
               children: [
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: (){},
-                      child: CircleAvatar(
-                          backgroundImage: NetworkImage(user.photoURL ?? "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"),
-                          minRadius: 25,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: (){},
+                        child: CircleAvatar(
+                            backgroundImage: NetworkImage(user.photoURL ?? "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"),
+                            minRadius: 25,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                ControllerHomePage().currentPage(currentIndexPage: _selectedIndex)
+               ControllerHomePage().currentPage(currentIndexPage: _selectedIndex)
               ],
             ),
           )

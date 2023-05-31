@@ -23,65 +23,63 @@ class _MoodCalendarState extends State<MoodCalendar> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(height: 30),
-        RichText(
-          textAlign: TextAlign.center,
-          text: const TextSpan(
-            children: [
-              TextSpan(
-                text: 'RASTREADOR DE\n',
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              TextSpan(
-                text: 'HUMOR',
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-        SizedBox(
-          height: mediaQuery.height * 0.6,
-          child: Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: const Color(0xFF372A28),
-                borderRadius: BorderRadius.circular(8)
-              ),
-              child: TableCalendar(
-                  locale: "en_US",
-                  headerStyle: const HeaderStyle(formatButtonVisible: false, formatButtonShowsNext: false, titleCentered: true),
-                  onDaySelected: _onDaySelected,
-                  calendarStyle: const CalendarStyle(
-                    weekendTextStyle: TextStyle(
-                      color: Color(0xFF17A1FA)
-                    ),
-                    disabledTextStyle: TextStyle(
-                      color: Color(0xFF616161)
-                    ),
-                    defaultTextStyle: TextStyle(
-                      color: Color(0xFFB3B3B3)
-                    ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 10),
+          RichText(
+            textAlign: TextAlign.center,
+            text: const TextSpan(
+              children: [
+                TextSpan(
+                  text: 'RASTREADOR DE\n',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w700,
                   ),
-                  rowHeight: 80,
-                  focusedDay: today,
-                  selectedDayPredicate: (day) => isSameDay(day, today),
-                  firstDay: DateTime.utc(2022),
-                  lastDay: DateTime.utc(2060)
-              ),
+                ),
+                TextSpan(
+                  text: 'HUMOR',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
             ),
           ),
-        )
-      ],
+          const SizedBox(height: 16),
+          Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFF372A28),
+              borderRadius: BorderRadius.circular(8)
+            ),
+            child: TableCalendar(
+                locale: "en_US",
+                headerStyle: const HeaderStyle(formatButtonVisible: false, formatButtonShowsNext: false, titleCentered: true),
+                onDaySelected: _onDaySelected,
+                calendarStyle: const CalendarStyle(
+                  weekendTextStyle: TextStyle(
+                    color: Color(0xFF17A1FA)
+                  ),
+                  disabledTextStyle: TextStyle(
+                    color: Color(0xFF616161)
+                  ),
+                  defaultTextStyle: TextStyle(
+                    color: Color(0xFFB3B3B3)
+                  ),
+                ),
+                rowHeight: 80,
+                focusedDay: today,
+                selectedDayPredicate: (day) => isSameDay(day, today),
+                firstDay: DateTime.utc(2022),
+                lastDay: DateTime.utc(2060)
+            ),
+          )
+        ],
+      ),
     );
   }
 
