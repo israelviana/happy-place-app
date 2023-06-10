@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(width: 100, height: 1, color: Color(0xFF372A28)),
+              Container(width: 100, height: 1, color: const Color(0xFF372A28)),
               const SizedBox(width: 3),
               const Text("Ou acesse com",
                   style: TextStyle(

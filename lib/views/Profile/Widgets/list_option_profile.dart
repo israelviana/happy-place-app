@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../Services/auth_service.dart';
-import '../../repository/google_sign_in_repository.dart';
-import '../Services/auth_service.dart';
+import '../../../../Services/auth_service.dart';
+import '../../../../repository/google_sign_in_repository.dart';
+import '../../../Services/auth_service.dart';
 
 class ListOptionProfile extends StatefulWidget {
   const ListOptionProfile({Key? key}) : super(key: key);

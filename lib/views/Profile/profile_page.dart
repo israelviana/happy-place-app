@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:happy_place/componentes/list_option_profile.dart';
+import 'package:happy_place/views/Profile/Widgets/list_option_profile.dart';
 import 'package:happy_place/models/user_model.dart';
 import 'package:happy_place/repository/shared_preferences_repository.dart';
 
