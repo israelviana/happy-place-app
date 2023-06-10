@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:happy_place/utils/map_music.dart';
 
+import '../repository/url_launcher.dart';
+
 class ListSongs extends StatefulWidget {
   const ListSongs({Key? key}) : super(key: key);
 
@@ -9,8 +11,6 @@ class ListSongs extends StatefulWidget {
 }
 
 class _ListSongsState extends State<ListSongs> {
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +50,12 @@ class _ListSongsState extends State<ListSongs> {
   Widget boxMusic({required String image, required String linkMusic}){
     return Padding(
       padding: const EdgeInsets.only(right: 14),
-      child: CircleAvatar(
-        minRadius: 40,
-        backgroundImage: NetworkImage(image),
+      child: GestureDetector(
+        onTap: () => UrlLauncher().launchLink(url: linkMusic),
+        child: CircleAvatar(
+          minRadius: 40,
+          backgroundImage: NetworkImage(image),
+        ),
       ),
     );
   }
