@@ -27,7 +27,7 @@ class GoogleSignInHappyPlace extends ChangeNotifier {
   }
 
   Future logout() async{
-    await googleSignIn.disconnect();
+    await googleSignIn.signOut();
     FirebaseAuth.instance.signOut();
   }
 }

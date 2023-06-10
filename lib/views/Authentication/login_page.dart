@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:happy_place/Services/auth_service.dart';
-import 'package:happy_place/componentes/ButtonHappyPlace.dart';
+import 'package:happy_place/componentes/button_happy_place.dart';
 import 'package:happy_place/componentes/input_form.dart';
-import 'package:happy_place/repository/google_sign_in.dart';
+import 'package:happy_place/repository/google_sign_in_repository.dart';
+import 'package:happy_place/router.dart';
 import 'package:happy_place/views/Home/home_page.dart';
 import 'package:provider/provider.dart';
 
@@ -26,19 +27,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    setFormAction(true);
   }
 
-  setFormAction(bool action) {
-    setState(() {
-      isLogin = action;
-      if (isLogin) {
-        titleButton = 'Acessar';
-      } else {
-        titleButton = 'Finalizar cadastro';
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,22 +69,14 @@ class _LoginPageState extends State<LoginPage> {
           InputForm(controller: _passwordController, hintText: "Senha", title: "Digite seu senha"),
           const SizedBox(height: 30),
           ButtonHappyPlace(
-              onTap: () {
-                if (isLogin) {
-                  login();
-                } else {
-                  register();
-                }
-              },
-              title: titleButton,
+              onTap: () => login(),
+              title: "Acessar",
               type: TypeButton.primary),
           const SizedBox(height: 30),
-          isLogin ? ButtonHappyPlace(
-              onTap: () {
-                setFormAction(!isLogin);
-              },
+          ButtonHappyPlace(
+              onTap: () => Navigator.pushNamed(context, registerPageRoute),
               title: "Cadastrar",
-              type: TypeButton.secondary) : const SizedBox(),
+              type: TypeButton.secondary),
           const SizedBox(height: 17),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -134,23 +116,14 @@ class _LoginPageState extends State<LoginPage> {
 
   login() async {
     try {
-      await context
-          .read<AuthService>()
-          .login(_emailController.text, _passwordController.text);
+      await context.read<AuthService>().login(_emailController.text, _passwordController.text);
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text("Seja bem-vindo!"),
+              backgroundColor: Colors.green)
+      );
     } on AuthException catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message)));
-    }
-  }
-
-  register() async {
-    try {
-      await context
-          .read<AuthService>()
-          .register(_emailController.text, _passwordController.text);
-    } on AuthException catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message), backgroundColor: Colors.red,));
     }
   }
 
@@ -158,8 +131,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       context.read<GoogleSignInHappyPlace>().googleLogin();
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.toString())));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 }

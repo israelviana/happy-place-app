@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_place/Services/auth_service.dart';
 import 'package:happy_place/auth_check.dart';
-import 'package:happy_place/repository/google_sign_in.dart';
+import 'package:happy_place/repository/google_sign_in_repository.dart';
 import 'package:happy_place/router.dart';
 import 'package:provider/provider.dart';
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:happy_place/Services/auth_service.dart';
+import 'package:happy_place/views/Authentication/login_page.dart';
 import 'package:happy_place/views/Home/home_page.dart';
-import 'package:happy_place/views/Login/login_page.dart';
+
 import 'package:provider/provider.dart';
 
 class AuthCheck extends StatefulWidget {

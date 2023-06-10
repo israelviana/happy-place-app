@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:happy_place/Services/auth_service.dart';
 import 'package:happy_place/controller/controller_home_page.dart';
 import 'package:happy_place/router.dart';
-import 'package:happy_place/views/Profile/profile.dart';
+import 'package:happy_place/views/Profile/profile_page.dart';
 import 'package:provider/provider.dart';
 import '../../componentes/icon_button_bar.dart';
-import '../../repository/google_sign_in.dart';
+import '../../repository/google_sign_in_repository.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -38,14 +38,6 @@ class _HomePageState extends State<HomePage> {
           child: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.sensor_occupied_sharp),
-                label: 'Meditação',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.book),
-                label: 'Palavra do dia',
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
               ),
@@ -56,6 +48,10 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.library_music_sharp),
                 label: 'Músicas',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.book),
+                label: 'Palavra do dia',
               ),
             ],
             currentIndex: _selectedIndex,
