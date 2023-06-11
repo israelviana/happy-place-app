@@ -52,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void _register() async {
+  Future<void> _register() async {
     try {
       await context.read<AuthService>().register(_emailController.text, _passwordController.text);
       _saveUserData().whenComplete(() {

@@ -74,7 +74,6 @@ class _ListOptionProfileState extends State<ListOptionProfile> {
   }
 
   Future<void> _logout() async{
-    await context.read<AuthService>().logout();
     await context.read<GoogleSignInHappyPlace>().logout().whenComplete(() {
       Navigator.pop(context);
     });

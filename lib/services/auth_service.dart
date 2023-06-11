@@ -7,7 +7,7 @@ class AuthException implements Exception {
 }
 
 class AuthService extends ChangeNotifier{
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   User? usuario;
   bool isLoading = true;
 
@@ -15,7 +15,7 @@ class AuthService extends ChangeNotifier{
     _authCheck();
   }
 
-  _authCheck() {
+  void _authCheck() {
     _auth.authStateChanges().listen((User? user) {
       usuario = (user == null) ? null : user;
       isLoading = false;
@@ -23,12 +23,12 @@ class AuthService extends ChangeNotifier{
     });
   }
 
-  _getUser() {
+  void _getUser() {
     usuario = _auth.currentUser;
     notifyListeners();
   }
 
-  register(String email, String password) async{
+  Future<void> register(String email, String password) async{
     try{
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
       _getUser();
@@ -41,7 +41,7 @@ class AuthService extends ChangeNotifier{
     }
   }
 
-  login(String email, String password) async{
+  Future<void> login(String email, String password) async{
     try{
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       _getUser();
@@ -54,7 +54,7 @@ class AuthService extends ChangeNotifier{
     }
   }
 
-  logout() async{
+  Future<void> logout() async{
     await _auth.signOut();
     _getUser();
   }

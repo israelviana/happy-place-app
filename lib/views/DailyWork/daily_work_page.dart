@@ -26,7 +26,7 @@ class _DailyWorkState extends State<DailyWork> {
     super.initState();
   }
 
-  getCatRepository() async{
+  Future<void> getCatRepository() async{
     await ApiAnimalRepository().getApiCat().then((value) {
       setState(() {
         cats = value;
@@ -119,8 +119,10 @@ class _DailyWorkState extends State<DailyWork> {
 
   Widget cardWork(){
     return Container(
-      height: 88,
-      width: double.infinity,
+      constraints: const BoxConstraints(
+        minHeight: 88,
+        minWidth: double.infinity
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8)
@@ -138,9 +140,11 @@ class _DailyWorkState extends State<DailyWork> {
   }
 
   Widget cardAnimals({required String urlImage}){
-    return SizedBox(
-      height: 150,
-      width: 150,
+    return Container(
+      constraints: const BoxConstraints(
+        minHeight: 150,
+        minWidth: 150,
+      ),
       child: Padding(
           padding: const EdgeInsets.all(8),
           child: Image.network(urlImage, fit: BoxFit.cover)

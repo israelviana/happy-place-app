@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_place/views/Authentication/login_page.dart';
 import 'package:happy_place/views/Authentication/register_page.dart';

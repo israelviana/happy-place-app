@@ -17,12 +17,14 @@ class _MoodCalendarState extends State<MoodCalendar> {
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
+      listDaysSelected.add(day);
       today = day;
       showDialogTrackingMood(day: day);
     });
   }
 
-  _saveDataDay({required DateTime day}) async{
+/*
+  Future<void> _saveDataDay({required DateTime day}) async{
     if(!listDaysSelected.contains(day)){
       listDaysSelected.add(day);
     }
@@ -38,16 +40,14 @@ class _MoodCalendarState extends State<MoodCalendar> {
       });
     });
     return listDaysSelected;
-  }
+  }*/
 
   bool _compareDay({required DateTime day}){
-    _getDataDay();
     return listDaysSelected.contains(day);
   }
 
   @override
   void initState() {
-    _getDataDay();
     super.initState();
   }
 
@@ -171,7 +171,7 @@ class _MoodCalendarState extends State<MoodCalendar> {
   Widget iconMoodButton({required String pathIcon, required DateTime day}){
     return GestureDetector(
       onTap: () {
-        _saveDataDay(day: day);
+        Navigator.pop(context);
       },
       child: SvgPicture.asset(pathIcon, height: 40, width: 40),
     );

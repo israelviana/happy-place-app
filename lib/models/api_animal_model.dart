@@ -15,10 +15,10 @@ class ApiAnimalModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['url'] = this.url;
-    data['width'] = this.width;
-    data['height'] = this.height;
+    data['id'] = id;
+    data['url'] = url;
+    data['width'] = width;
+    data['height'] = height;
     return data;
   }
 }

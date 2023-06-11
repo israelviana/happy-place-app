@@ -9,7 +9,7 @@ class GoogleSignInHappyPlace extends ChangeNotifier {
 
   GoogleSignInAccount? get user => _user!;
 
-  Future googleLogin() async {
+  Future<void> googleLogin() async {
     final googleUser = await googleSignIn.signIn();
     if (googleUser == null) return;
     _user = googleUser;
@@ -26,8 +26,8 @@ class GoogleSignInHappyPlace extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future logout() async{
+  Future<void> logout() async{
     await googleSignIn.signOut();
-    FirebaseAuth.instance.signOut();
+    await FirebaseAuth.instance.signOut();
   }
 }

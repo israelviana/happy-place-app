@@ -23,8 +23,8 @@ class _AuthCheckState extends State<AuthCheck> {
     else return HomePage();
   }
 
-  loading() {
-    return Scaffold(
+  Widget loading() {
+    return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),
       ),

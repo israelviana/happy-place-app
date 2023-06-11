@@ -20,7 +20,7 @@ void main() async{
           ChangeNotifierProvider(create: (context) => AuthService()),
           ChangeNotifierProvider(create: (context) => GoogleSignInHappyPlace()),
         ],
-      child: MyApp(),
+      child: const MyApp(),
     )
   );
 }
@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AppHappyPlace',
-      home: AuthCheck(),
-      onGenerateRoute: RouterHappyPlace().mainRoutes(),/// load
+      home: const AuthCheck(),
+      onGenerateRoute: RouterHappyPlace().mainRoutes(),
     );
   }
 }
