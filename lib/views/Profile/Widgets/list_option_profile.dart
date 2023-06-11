@@ -30,12 +30,14 @@ class _ListOptionProfileState extends State<ListOptionProfile> {
   }
 
   Widget itemProfile({required int index}){
-    return SizedBox(
-      height: 88,
-      width: double.infinity,
+    return Container(
+      constraints: const BoxConstraints(
+        maxHeight: 88,
+        minWidth: double.infinity,
+      ),
       child: Column(
         children: [
-          Divider(),
+          divider(),
           Padding(
             padding: const EdgeInsets.only(top: 20, bottom: 20),
             child: Row(
@@ -54,20 +56,24 @@ class _ListOptionProfileState extends State<ListOptionProfile> {
               ],
             ),
           ),
-          Divider(),
+          divider(),
         ],
       ),
     );
   }
 
-  Widget Divider(){
+  Widget divider(){
     return Container(
-      height: 1,
-      color: Color(0xFF372A28),
+      constraints: const BoxConstraints(
+        maxHeight: 1
+      ),
+      decoration: const BoxDecoration(
+        color: Color(0xFF372A28),
+      ),
     );
   }
 
-  void _logout() async{
+  Future<void> _logout() async{
     await context.read<AuthService>().logout();
     await context.read<GoogleSignInHappyPlace>().logout().whenComplete(() {
       Navigator.pop(context);

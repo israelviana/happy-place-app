@@ -39,9 +39,9 @@ class _LoginPageState extends State<LoginPage> {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return HomePage();
+              return const HomePage();
             } else if (snapshot.hasError) {
-              return Text("deu errado no login with google!");
+              return const Text("deu errado no login with google!");
             } else {
               return CustomScrollView(
                 slivers: [
@@ -117,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
   login() async {
     try {
       await context.read<AuthService>().login(_emailController.text, _passwordController.text);
+      //n pode
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text("Seja bem-vindo!"),

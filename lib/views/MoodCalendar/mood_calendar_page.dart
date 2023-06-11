@@ -23,7 +23,9 @@ class _MoodCalendarState extends State<MoodCalendar> {
   }
 
   _saveDataDay({required DateTime day}) async{
-    listDaysSelected.add(day);
+    if(!listDaysSelected.contains(day)){
+      listDaysSelected.add(day);
+    }
     await SharedPreferencesRepository().saveDaySelected(listDays: listDaysSelected).whenComplete(() {
       Navigator.pop(context);
     });
@@ -48,7 +50,6 @@ class _MoodCalendarState extends State<MoodCalendar> {
     _getDataDay();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,9 @@ class Utils{
     return Container(
       margin: const EdgeInsets.only(top: 30),
       padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-      width: double.infinity,
+      constraints: const BoxConstraints(
+        minWidth: double.infinity,
+      ),
       decoration: const BoxDecoration(
         color: Color.fromRGBO(55, 42, 40, 0.7),
         borderRadius: BorderRadius.only(

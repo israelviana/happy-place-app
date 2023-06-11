@@ -52,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  _register() async {
+  void _register() async {
     try {
       await context.read<AuthService>().register(_emailController.text, _passwordController.text);
       _saveUserData().whenComplete(() {
@@ -68,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  Future _saveUserData() async{
+  Future<void> _saveUserData() async{
     await SharedPreferencesRepository().saveUserData(name: _nameController.text, email: _emailController.text, password: _passwordController.text);
   }
 
