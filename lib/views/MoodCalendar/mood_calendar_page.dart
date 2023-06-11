@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:happy_place/repository/shared_preferences_repository.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MoodCalendar extends StatefulWidget {
@@ -12,13 +13,42 @@ class MoodCalendar extends StatefulWidget {
 
 class _MoodCalendarState extends State<MoodCalendar> {
   DateTime today = DateTime.now();
+  List<DateTime> listDaysSelected = [];
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
-      showDialogTrackingMood();
+      showDialogTrackingMood(day: day);
     });
   }
+
+  _saveDataDay({required DateTime day}) async{
+    listDaysSelected.add(day);
+    await SharedPreferencesRepository().saveDaySelected(listDays: listDaysSelected).whenComplete(() {
+      Navigator.pop(context);
+    });
+  }
+
+  Future<List> _getDataDay() async{
+    await SharedPreferencesRepository().getSaveDaySelected().then((value) {
+      setState(() {
+        listDaysSelected = value;
+      });
+    });
+    return listDaysSelected;
+  }
+
+  bool _compareDay({required DateTime day}){
+    _getDataDay();
+    return listDaysSelected.contains(day);
+  }
+
+  @override
+  void initState() {
+    _getDataDay();
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +102,7 @@ class _MoodCalendarState extends State<MoodCalendar> {
                 ),
                 rowHeight: 78,
                 focusedDay: today,
-                selectedDayPredicate: (day) => isSameDay(day, today),
+                selectedDayPredicate: (day) => _compareDay(day: day),
                 firstDay: DateTime.utc(2022),
                 lastDay: DateTime.utc(2060)
             ),
@@ -82,7 +112,7 @@ class _MoodCalendarState extends State<MoodCalendar> {
     );
   }
 
-  void showDialogTrackingMood() {
+  void showDialogTrackingMood({required DateTime day}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -116,15 +146,15 @@ class _MoodCalendarState extends State<MoodCalendar> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          iconMoodButton(pathIcon: "assets/icons/muitoTriste.svg"),
+                          iconMoodButton(pathIcon: "assets/icons/muitoTriste.svg", day: day),
                           const SizedBox(width: 10),
-                          iconMoodButton(pathIcon: "assets/icons/maisOuMenosTriste.svg"),
+                          iconMoodButton(pathIcon: "assets/icons/maisOuMenosTriste.svg", day: day),
                           const SizedBox(width: 10),
-                          iconMoodButton(pathIcon: "assets/icons/medioTriste.svg"),
+                          iconMoodButton(pathIcon: "assets/icons/medioTriste.svg", day: day),
                           const SizedBox(width: 10),
-                          iconMoodButton(pathIcon: "assets/icons/maisOuMenosFeliz.svg"),
+                          iconMoodButton(pathIcon: "assets/icons/maisOuMenosFeliz.svg", day: day),
                           const SizedBox(width: 10),
-                          iconMoodButton(pathIcon: "assets/icons/muitoFeliz.svg"),
+                          iconMoodButton(pathIcon: "assets/icons/muitoFeliz.svg", day: day),
                         ],
                       )
                     ],
@@ -137,10 +167,10 @@ class _MoodCalendarState extends State<MoodCalendar> {
     );
   }
 
-  Widget iconMoodButton({required String pathIcon}){
+  Widget iconMoodButton({required String pathIcon, required DateTime day}){
     return GestureDetector(
       onTap: () {
-        Navigator.pop(context);
+        _saveDataDay(day: day);
       },
       child: SvgPicture.asset(pathIcon, height: 40, width: 40),
     );

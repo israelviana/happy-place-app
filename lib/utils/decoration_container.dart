@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Utils{
   Widget containerWithDecoration({required Widget child}){
@@ -16,4 +17,17 @@ class Utils{
       child: child
     );
   }
+
+  // Função para converter uma lista de DateTime em uma lista de String
+  List<String> convertDateTimeListToStringList(List<DateTime> dateTimeList) {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
+    return dateTimeList.map((dateTime) => formatter.format(dateTime.toUtc())).toList();
+  }
+
+  // Função para converter uma lista de String em uma lista de DateTime
+  List<DateTime> convertStringListToDateTimeList(List<String> stringList) {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
+    return stringList.map((string) => formatter.parse(string)).toList();
+  }
+
 }
