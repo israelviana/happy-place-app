@@ -55,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Future<void> _register() async {
     try {
       await context.read<AuthService>().register(_emailController.text, _passwordController.text);
-      _saveUserData().whenComplete(() {
+      await _saveUserData().whenComplete(() {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
                 content: Text("Cadastro realizado com sucesso!"),

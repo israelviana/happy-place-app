@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesRepository{
 
-  Future saveUserData({String? name, String? email, String? password}) async {
+  Future<void> saveUserData({String? name, String? email, String? password}) async {
     UserModel userData = UserModel(
         name: name,
         email: email,
@@ -25,19 +25,14 @@ class SharedPreferencesRepository{
     return userDataModel;
   }
 
-  Future saveDaySelected({required List<DateTime> listDays}) async{
+  Future saveDaySelected({required List<String> listDays}) async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> listStringDay = Utils().convertDateTimeListToStringList(listDays);
-    prefs.setStringList("listDaySelected", listStringDay);
+    prefs.setStringList("listDaySelected", listDays);
   }
 
-  Future<List<DateTime>> getSaveDaySelected() async{
+  Future<List<String>> getSaveDaySelected() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<DateTime> listDay = [];
-    List<String> listDayJson = prefs.getStringList("listDaySelected") ?? [];
-    if(listDayJson.isNotEmpty){
-      listDay = Utils().convertStringListToDateTimeList(listDayJson);
-    }
+    List<String> listDay = prefs.getStringList("listDaySelected") ?? [];
     return listDay;
   }
 

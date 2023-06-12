@@ -25,7 +25,7 @@ class _ProfileState extends State<Profile> {
     super.initState();
   }
 
-  _getUserDate() async{
+  Future<void> _getUserDate() async{
     await SharedPreferencesRepository().getUserData().then((value) {
       setState(() {
         userDate = value;

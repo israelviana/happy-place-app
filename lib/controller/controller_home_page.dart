@@ -3,6 +3,7 @@ import 'package:happy_place/views/MoodCalendar/mood_calendar_page.dart';
 import 'package:happy_place/views/Profile/profile_page.dart';
 
 import '../views/DailyWork/daily_work_page.dart';
+import '../views/Home/initial_page.dart';
 import '../views/Song/song_page.dart';
 
 class ControllerHomePage{
@@ -43,9 +44,7 @@ class ControllerHomePage{
   }
 
   Widget _homePage(){
-    return const Center(
-      child: Text("home page"),
-    );
+    return const InitialPage();
   }
 
   Widget _songPage(){
