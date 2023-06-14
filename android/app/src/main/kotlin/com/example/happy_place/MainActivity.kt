@@ -1,4 +1,4 @@
-package com.example.happy_place
+package com.happy_place
 
 import io.flutter.embedding.android.FlutterActivity
 
