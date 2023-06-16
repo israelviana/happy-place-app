@@ -19,6 +19,7 @@ class _InitialPageState extends State<InitialPage> {
               fontWeight: FontWeight.w700,
               fontSize: 30
             )),
+            const SizedBox(height: 60),
             Container(
               constraints: BoxConstraints(
                 minHeight: 40,

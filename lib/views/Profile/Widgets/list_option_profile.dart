@@ -15,49 +15,48 @@ class ListOptionProfile extends StatefulWidget {
 class _ListOptionProfileState extends State<ListOptionProfile> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 400,
-      child: ListView.builder(
-          itemCount: 2,
-          itemBuilder: (BuildContext context, int index){
-            return GestureDetector(
-                onTap: () =>  index == 1 ? _logout() : (){},
-                child: itemProfile(index: index)
-            );
-          }
-      ),
+    return ListView.builder(
+        itemCount: 2,
+        itemBuilder: (BuildContext context, int index){
+          return itemProfile(index: index);
+        }
     );
   }
 
   Widget itemProfile({required int index}){
-    return Container(
-      constraints: const BoxConstraints(
-        maxHeight: 88,
-        minWidth: double.infinity,
-      ),
-      child: Column(
-        children: [
-          divider(),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, bottom: 20),
-            child: Row(
-              children: [
-                index == 1 ? const Icon(Icons.exit_to_app)
-                : const Icon(Icons.account_box),
-                const SizedBox(width: 16),
-                index == 1 ? const AutoSizeText("Sair", style: TextStyle(
-                  color: Color(0xFF372A28),
-                  fontSize: 14
-                )) :
-                const AutoSizeText("Sobre nós", style: TextStyle(
-                    color: Color(0xFF372A28),
-                    fontSize: 14
-                )),
-              ],
+    return InkWell(
+      onTap: () {
+        index == 1 ? _logout() : (){};
+      },
+      child: Container(
+        constraints: const BoxConstraints(
+          maxHeight: 88,
+          minWidth: double.infinity,
+        ),
+        child: Column(
+          children: [
+            divider(),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 20),
+              child: Row(
+                children: [
+                  index == 1 ? const Icon(Icons.exit_to_app)
+                      : const Icon(Icons.account_box),
+                  const SizedBox(width: 16),
+                  index == 1 ? const AutoSizeText("Sair", style: TextStyle(
+                      color: Color(0xFF372A28),
+                      fontSize: 14
+                  )) :
+                  const AutoSizeText("Sobre nós", style: TextStyle(
+                      color: Color(0xFF372A28),
+                      fontSize: 14
+                  )),
+                ],
+              ),
             ),
-          ),
-          divider(),
-        ],
+            divider(),
+          ],
+        ),
       ),
     );
   }

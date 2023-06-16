@@ -77,10 +77,9 @@ class _ProfileState extends State<Profile> {
                           ),
                         ],
                       ),
-                      Column(
-                        children: [
-                          ListOptionProfile()
-                        ],
+                      const SizedBox(
+                          height: 400,
+                          child: ListOptionProfile()
                       )
                     ],
                   );

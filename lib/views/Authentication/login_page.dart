@@ -64,9 +64,9 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           SvgPicture.asset("assets/images/logoHappyPlace.svg"),
           const SizedBox(height: 76),
-          InputForm(controller: _emailController, hintText: "Email", title: "Digite seu e-mail"),
+          InputForm(controller: _emailController, hintText: "Email", title: "Digite seu e-mail", obscureText: false, isSufixIconObscure: false,),
           const SizedBox(height: 30),
-          InputForm(controller: _passwordController, hintText: "Senha", title: "Digite seu senha"),
+          InputForm(controller: _passwordController, hintText: "Senha", title: "Digite seu senha", obscureText: true, isSufixIconObscure: true,),
           const SizedBox(height: 30),
           ButtonHappyPlace(
               onTap: () => login(),

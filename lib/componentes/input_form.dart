@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class InputForm extends StatefulWidget {
-  const InputForm({Key? key, required this.controller, required this.hintText, required this.title}) : super(key: key);
+  InputForm({Key? key, required this.controller, required this.hintText, required this.title, required this.obscureText, required this.isSufixIconObscure}) : super(key: key);
   final controller;
   final String? hintText;
   final String title;
+  bool obscureText;
+  final bool isSufixIconObscure;
 
 
   @override
@@ -21,11 +24,32 @@ class _InputFormState extends State<InputForm> {
         TextFormField(
           cursorColor: const Color(0xFFf0821e),
           controller: widget.controller,
+          obscureText: widget.obscureText,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 5),
             hintText: widget.hintText,
             hintStyle: const TextStyle(fontFamily: "Josefin Sans", fontSize: 18, fontWeight: FontWeight.w700, color: Color.fromRGBO(255, 244, 234, 0.5)),
             fillColor: const Color.fromRGBO(55, 42, 40, 0.4),
+            suffixIcon: widget.isSufixIconObscure
+                ? IconButton(
+              onPressed: () {
+                setState(() {
+                  widget.obscureText = !widget.obscureText;
+                });
+              },
+              icon: widget.obscureText
+                  ? SvgPicture.asset(
+                "assets/icons/eyeClosed.svg",
+                width: 30,
+                height: 30,
+              )
+                  : SvgPicture.asset(
+                "assets/icons/eyeOpen.svg",
+                width: 30,
+                height: 30,
+              ),
+            )
+                : null,
             filled: true,
             border:  const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),

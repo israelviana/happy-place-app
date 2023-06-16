@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:538862384527:android:f9ef50ae0b616ebb2507fa",
+        "mobilesdk_app_id": "1:538862384527:android:2a9e9e38707783bd2507fa",
         "android_client_info": {
           "package_name": "com.happy_place"
         }
       },
       "oauth_client": [
         {
-          "client_id": "538862384527-bjicslrk1jhahdml1dlj4vdkrkfu94id.apps.googleusercontent.com",
+          "client_id": "538862384527-0okpldsfam9n2jnlrnvq4vb35bqoq237.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +27,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "538862384527-bjicslrk1jhahdml1dlj4vdkrkfu94id.apps.googleusercontent.com",
+              "client_id": "538862384527-0okpldsfam9n2jnlrnvq4vb35bqoq237.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "538862384527-93nhbgdfiqdq9s02svg1kb4amkt7u10a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.happyPlace"
+              }
             }
           ]
         }
