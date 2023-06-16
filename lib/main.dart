@@ -18,7 +18,7 @@ void main() async{
     MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => AuthService()),
-          ChangeNotifierProvider(create: (context) => GoogleSignInHappyPlace()),
+          ChangeNotifierProvider(create: (context) => GoogleSignInHappyPlace())
         ],
       child: const MyApp(),
     )
